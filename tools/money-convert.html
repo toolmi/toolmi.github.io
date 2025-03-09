@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>钱币单位转换</title>
+</head>
+<body>
+	<h1>钱币单位转换</h1>
+	<hr><blockquote>使用方法：在任意一个输入框里输入数字，自动在每一个输入框里展示对应的结果。(小数点数值可能有误差，请注意整数部分，都是约等于的值，仅供参考。)<br>注意：本工具使用的汇率是2025-03-08 06:00时间的标准。</blockquote><hr>
+	<br>
+	人民币（CNY）约值：<input oninput="USD.value=RMB.value*0.1382;JPY.value=RMB.value*20.4645;KRW.value=RMB.value*200.0919;HKD.value=RMB.value*1.0742;" type="text" id="RMB" placeholder="请输入数值。"/><br>
+	美元（USD）约值：<input oninput="RMB.value=USD.value*7.2342;JPY.value=USD.value*148.045;KRW.value=USD.value*1447.5145;HKD.value=USD.value*7.7707;" type="text" id="USD" placeholder="请输入数值。"/><br>
+	日元（JPY）约值：<input oninput="RMB.value=JPY.value*0.04886;USD.value=JPY.value*0.006754;KRW.value=JPY.value*9.7775;HKD.value=JPY.value*0.05248;" type="text" id="JPY" placeholder="请输入数值。"/><br>
+	韩元（KRW）约值：<input oninput="RMB.value=KRW.value*0.004997;USD.value=KRW.value*0.0006908;JPY.value=KRW.value*0.1022;HKD.value=KRW.value*0.005368;" type="text" id="KRW" placeholder="请输入数值。"/><br>
+	港币（HKD）约值：<input oninput="RMB.value=HKD.value*0.9309;USD.value=HKD.value*0.1286;JPY.value=HKD.value*19.0516;KRW.value=HKD.value*186.2774;" type="text" id="HKD" placeholder="请输入数值。"/><hr>
+	<a href="https://toolmi.github.io/">返回</a>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>人民币大写转换工具</title>
+</head>
+<body>
+<h1>RMB（人民币）大写转换工具</h1>
+<hr><ul><li>使用方法：请在下方输入框输入数字，之后单击“转换”按钮，即可在输入框下方看到人民币大写之后的结果。</li></ul>
+<input type="text" id="numbers" placeholder="请输入数字。"/><button onclick="result.innerHTML=convertRMB(numbers.value);">转换</button>
+<br><h2 id="result"></h2><a href="https://toolmi.github.io/">返回</a>
+</body>
+</html>
+<script>
+function convertRMB(num) {
+    const numMap = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+    const unitMap = ['', '拾', '佰', '仟'];
+    const bigUnitMap = ['', '万', '亿', '兆'];
+    if (isNaN(num) || num < 0 || num > 999999999.99) {
+        return '您输入的金额有误，请确保您输入了阿拉伯数字。<br>如果您输入的确实是阿拉伯数字，请确保您的数字不要太大，本工具最多支持9位数。<br>工具有问题？请<a href="mailto:2087428392@qq.com">反馈</a>。';
+    }
+    const integerPart = Math.floor(num);
+    const fractionPart = Math.round((num - integerPart) * 100);
+    const integerStr = integerPart.toString();
+    let result = '';
+    let zeroCount = 0;
+    for (let i = 0; i < integerStr.length; i++) {
+        const n = parseInt(integerStr[i]);
+        const p = integerStr.length - i - 1;
+        const q = Math.floor(p / 4);
+        const r = p % 4;
+
+        if (n === 0) {
+            zeroCount++;
+        } else {
+            if (zeroCount > 0) {
+                result += numMap;
+            }
+            zeroCount = 0;
+            result += numMap[n] + unitMap[r];
+        }
+        if (r === 0 && zeroCount < 4) {
+            result += bigUnitMap[q];
+        }
+    }
+    result = result.replace(/零[拾佰仟]/g, '零').replace(/零{2,}/g, '零')
+                   .replace(/零万/g, '万').replace(/零亿/g, '亿')
+                   .replace(/零元零?整$/, '元整')
+                   .replace(/零$/, '');
+    if (!/[壹贰叁肆伍陆柒捌玖]/.test(result)) {
+        result = '零' + result;
+    }
+    if (fractionPart === 0) {
+        result += '元整';
+    } else {
+    }
+
+    return result;
+}
+</script>
