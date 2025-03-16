@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>文本处理工具</title>
+<style>
+body{
+	font-family: Helvetica,Arial,sans-serif;
+}
+</style>
+</head>
+<body>
+<h1>文本处理工具</h1>
+<hr>
+<h2>使用方法</h2>
+<ul><li>请在右侧输入框输入原文，然后在左侧输入文本处理命令（使用自创的Tmi文本处理命令）。然后点击“处理”即可。</li></ul>
+<dd><h2>命令说明（Tmi Text Command 1.0 Beta）</h2>
+DLS：删除所有标点符号；<br>
+RPA [字符1] [字符2]：替换字符串；<br>
+FND [字符]：查找字符串（寻找到的字符串将会用方括号括出来）；<br>
+HGL [字符]：查找字符串并高亮；<br>
+RVS [行号]：倒置特定行的字符；<br>
+DUL [行号]：编码URL；<br>
+DMK：删除所有HTML标签。<br>
+...
+</dd>
+<div style="display:inline-block;"><h2>命令区</h2><textarea id="command" cols=70 rows=30 placeholder="输入Tmi文本处理命令..."></textarea></div>
+<div style="display:inline-block;"><h2>输出区</h2><textarea id="iarea" cols=70 rows=15 oninput="command.value = iarea.value+'\n---\n在此输入命令。';" placeholder="输入原文..."></textarea><br><button onclick="out.innerHTML = Tmi_ParseText(command.value);">处理</button><br><a id="out">输出区域。</a></div><hr><a href="https://toolmi.github.io/">返回</a>
+<script>
+function Tmi_ParseText(command)
+{
+	var Tmi_template = command.split("---");
+	var Tmi_OriginalText = Tmi_template[0];
+	var Tmi_Cmd = Tmi_template[1];
+	var CMD_lines = Tmi_Cmd.split("\n");
+	var parsedText = Tmi_OriginalText;
+	for(var i = 0;i < CMD_lines.length;i++)
+	{
+		var tmp = CMD_lines[i].split(" ");
+		if(tmp[0].toUpperCase() == "RPA")
+		{
+			parsedText = parsedText.replaceAll(tmp[1],tmp[2]);
+		}
+		else if(tmp[0].toUpperCase() == "DLS")
+		{
+			parsedText = parsedText.replaceAll(","," ").replaceAll("."," ").replaceAll("!"," ").replaceAll("?"," ").replaceAll("#"," ").replaceAll("("," ").replaceAll(")"," ").replaceAll("["," ").replaceAll("]"," ").replaceAll("\""," ").replaceAll("'"," ").replaceAll("，"," ").replaceAll("。"," ").replaceAll("！"," ").replaceAll("？"," ").replaceAll("："," ").replaceAll("；"," ").replaceAll("（"," ").replaceAll("）"," ").replaceAll("【"," ").replaceAll("】"," ").replaceAll("‘"," ").replaceAll("’"," ").replaceAll("“"," ").replaceAll("”"," ");
+		}
+		else if(tmp[0].toUpperCase() == "FND")
+		{
+			parsedText = parsedText.replaceAll(tmp[1],`[${tmp[1]}]`);
+		}
+		else if(tmp[0].toUpperCase() == "HGL")
+		{
+			parsedText = parsedText.replaceAll(tmp[1],`<a style="background:yellow;">${tmp[1]}</a>`);
+		}
+		else if(tmp[0].toUpperCase() == "RVS")
+		{
+			var e1 = parsedText.split("\n");
+			parsedText = parsedText.replace(e1[tmp[1]],e1[tmp[1]].split('').reverse().join(''));
+
+		}
+		else if(tmp[0].toUpperCase() == "DUL")
+		{
+			var e2 = parsedText.split("\n");
+			parsedText = parsedText.replace(e2[tmp[1]],encodeURIComponent(e2[tmp[1]]));
+		}
+		else if(tmp[0].toUpperCase() == "DMK")
+		{
+			parsedText = parsedText.replace(/<[^>]*>/g, '');
+		}
+	}
+	return parsedText;
+}
+</script>
+</body>
+</html>
