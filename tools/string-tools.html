@@ -23,7 +23,7 @@ HGL [字符]：查找字符串并高亮；<br>
 RVS [行号]：倒置特定行的字符；<br>
 DUL [行号]：编码URL；<br>
 DMK：删除所有HTML标签。<br>
-...
+*注：行号从0开始。
 </dd>
 <div style="display:inline-block;"><h2>命令区</h2><textarea id="command" cols=70 rows=30 placeholder="输入Tmi文本处理命令..."></textarea></div>
 <div style="display:inline-block;"><h2>输出区</h2><textarea id="iarea" cols=70 rows=15 oninput="command.value = iarea.value+'\n---\n在此输入命令。';" placeholder="输入原文..."></textarea><br><button onclick="out.innerHTML = Tmi_ParseText(command.value);">处理</button><br><a id="out">输出区域。</a></div><hr><a href="https://toolmi.github.io/">返回</a>
