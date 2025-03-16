@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>付费电影下载工具</title>
+</head>
+<body>
+<h1>付费电影下载工具</h1>
+<hr><ul><li>使用方法：在下方输入框粘贴电影网址，然后点击“免费观看”按钮，即可无时长限制观看。<dd><font color="red">注：接口由 虾米解析 提供。</font></dd></li></ul>
+<input type="text" id="addr" placeholder="请输入/粘贴网址。"/><button onclick="result.src='https://jx.xmflv.cc/?url='+addr.value;linksurl.innerHTML = '链接跳转';linksurl.href='https://jx.xmflv.cc/?url='+addr.value;">解析</button>
+<br><br><iframe src="https://jx.xmflv.cc/" id="result"></iframe><br><a id="linksurl" href=""></a><hr><a href="https://toolmi.github.io/">返回</a>
+</body>
+</html>
