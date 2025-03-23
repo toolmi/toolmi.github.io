@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MD5加密</title>
+<style>
+body{
+	font-family: Helvetica,Arial,sans-serif;
+}
+</style>
+</head>
+<body>
+<h1>MD5加密</h1>
+<hr>
+<h2>MD5介绍</h2>
+<ul><li>md5的全称是message-digest algorithm 5（信息-摘要算法），在90年代初由mit laboratory for computer science和rsa data security inc的ronald l. rivest开发出来，经md2、md3和md4发展而来。它的作用是让大容量信息在用数字签名软件签署私人密匙前被"压缩"成一种保密的格式（就是把一个任意长度的字节串变换成一定长的大整数）。</li></ul>
+<script src="crypto.js"></script>
+<br>
+本网页除了md5加密，同时一并提供SHA-1、SHA-256、SHA-512不可逆加密。
+<hr>
+<textarea oninput="convertAll();" placeholder="输入原文..." id="originalText" style="width:80%;height:50%"></textarea><br><button style="height:30px;width:100px;color:white;font-size:15px;border-radius:5px;border:1px solid black;background:green;box-shadow:2px 2px 2px 2px #ccc;" onclick="convertAll();">全部转换</button>
+<br>
+<code id='res'></code>
+<script>
+	function convertAll()
+	{
+		res.innerHTML = `MD5:<b>${CryptoJS.MD5(originalText.value)}</b><br>SHA1:<b>${CryptoJS.SHA1(originalText.value)}</b><br>SHA256:<b>${CryptoJS.SHA256(originalText.value)}</b><br>SHA512:<b>${CryptoJS.SHA512(originalText.value)}</b><br>`;
+	}
+</script>
+</body>
+</html>
