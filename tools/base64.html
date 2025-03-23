@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Base64转换</title>
+</head>
+<body>
+<h1>Base64转换</h1>
+ <style>
+button{
+    font-size:15px;
+    height:50px;
+    width:150px;
+    border-radius:5px;
+    box-shadow:5px 5px 5px 5px #ccc;
+    background:orange;
+    color:black;
+}
+button:hover{
+    font-size:15;
+    height:50px;
+    width:150px;
+    border-radius:5px;
+    box-shadow:5px 5px 5px 5px #ccc;
+    background:#ccc;
+    color:black;
+}
+textarea{
+    font-size:15px;
+    height:300px;
+    width:70%;
+    border-radius:5px;
+    outline:none;
+    border:1px solid black;
+    box-shadow:#ccc 5px 5px 5px;
+    background:white;
+}
+body{
+  font-family: Helvetica,Arial,sans-serif;
+}
+</style>
+<hr>
+<dd>Base64是网络上最常见的用于传输8Bit字节码的编码方式之一，Base64就是一种基于64个可打印字符来表示二进制数据的方法。</dd>
+<hr>
+<textarea id='tep' placeholder='输入Base64文字或普通文本。'></textarea><br>
+<button onclick='tep.value = _btoa(tep.value)'>Base64加密</button><button onclick='tep.value = _atob(tep.value)'>Base64解密</button>
+<script>
+function _btoa(str) {
+  const encoder = new TextEncoder();
+  const view = encoder.encode(str);
+  return btoa(String.fromCharCode.apply(null, new Uint8Array(view)));
+}
+function _atob(str) {
+  const decoder = new TextDecoder();
+  const binaryStr = atob(str);
+  const bytes = new Uint8Array(binaryStr.length);
+  for (let i = 0; i < binaryStr.length; i++) {
+    bytes[i] = binaryStr.charCodeAt(i);
+  }
+  return decoder.decode(bytes);
+}
+</script>
+<hr><a href="https://toolmi.github.io/">返回</a>
+</body>
+</html>
