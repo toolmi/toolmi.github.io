@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>粤语拼音转换工具</title>
+</head>
+<body>
+<h1>粤语拼音转换工具</h1>
+<hr>
+<ul><li>粤语，俗称白话，又称广东话。是一种声调语言，属汉藏语系汉语族汉语方言。粤语是我国汉语七大方言之一，又有古汉语“活化石”之称。粤语广泛通行于中国南方的广东中部、西部、广西东部、南部、海南部分及香港、澳门和东南亚的部分国家或地区，以及海外华人社区。</li></ul>
+<hr>
+<style>
+ button{
+    color:white;
+    font-size:15px;
+    height:35px;
+    width:150px;
+    border-radius:5px;
+    border:1px solid black;
+    box-shadow:#ccc 5px 5px 5px;
+    background:green;
+}
+</style>
+<script src='https://hellopgrmm.github.io/tools/tools2.js'></script>
+<textarea style='height:30%;width:50%;' id='AX' value='' placeholder='输入文字。'></textarea><br>
+<button onclick='yuepin()'>转换成粤语拼音</button><br><br>
+<div>
+<a id='ap'></a><br>
+<a id='bp'></a>
+</div>
+<script>
+function yuepin(){
+ap.innerHTML = "粤语拼音：";
+bp.innerHTML = "";
+fetch('https://hellopgrmm.github.io/tools/dic_trad.json')
+  .then(response => response.json())
+  .then(data => {
+      bp.innerHTML = '拼音对比:';
+      var b = document.getElementById('AX').value;
+      b = b.replaceAll('，','').replaceAll('。','').replaceAll('？','').replaceAll('！','').replaceAll('、','').replaceAll('（','').replaceAll('）','').replaceAll('“','').replaceAll('”','').replaceAll('；','').replaceAll('：','')
+      for(var u = 0;u < b.length;u++){
+          bp.innerHTML += b[u]+'('+data[b[u]].pinyin+')';
+          ap.innerHTML += data[b[u]].pinyin+" ";
+      }
+  })
+  .catch(error => alert("您输入的内容可能包含英文或其他非汉字字符，请输入纯汉字。"));
+}
+</script>
+<hr><a href="https://toolmi.github.io/">返回</a>
+</body>
+</html>
